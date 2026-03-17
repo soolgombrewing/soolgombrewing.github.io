@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Mäkgeolli? · Soolgom Brewing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --nacre: #C4A96A;
+    --nacre-dim: #8a7448;
+    --nacre-glow: rgba(196,169,106,0.15);
+    --white: #f0ece4;
+    --gray: #5a5550;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black); color: var(--white);
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    overflow-x: hidden; cursor: none; min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' fill='none'/><rect x='2' y='2' width='116' height='116' fill='none' stroke='rgba(196,169,106,0.07)' stroke-width='0.8'/><rect x='10' y='10' width='100' height='100' fill='none' stroke='rgba(196,169,106,0.04)' stroke-width='0.5'/><line x1='40' y1='10' x2='40' y2='110' stroke='rgba(196,169,106,0.03)' stroke-width='0.5'/><line x1='80' y1='10' x2='80' y2='110' stroke='rgba(196,169,106,0.03)' stroke-width='0.5'/><line x1='10' y1='40' x2='110' y2='40' stroke='rgba(196,169,106,0.03)' stroke-width='0.5'/><line x1='10' y1='80' x2='110' y2='80' stroke='rgba(196,169,106,0.03)' stroke-width='0.5'/><path d='M2,2 L18,2 L18,8 L8,8 L8,18 L2,18 Z' fill='none' stroke='rgba(196,169,106,0.09)' stroke-width='0.8'/><path d='M118,2 L102,2 L102,8 L112,8 L112,18 L118,18 Z' fill='none' stroke='rgba(196,169,106,0.09)' stroke-width='0.8'/><path d='M2,118 L18,118 L18,112 L8,112 L8,102 L2,102 Z' fill='none' stroke='rgba(196,169,106,0.09)' stroke-width='0.8'/><path d='M118,118 L102,118 L102,112 L112,112 L112,102 L118,102 Z' fill='none' stroke='rgba(196,169,106,0.09)' stroke-width='0.8'/></svg>");
+    background-size: 120px 120px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .cursor {
+    width: 8px; height: 8px; background: var(--nacre); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease; transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 32px; height: 32px; border: 1px solid rgba(196,169,106,0.4); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%);
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+  }
+  .nav-logo {
+    font-family: 'Noto Serif KR', serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.15em; color: var(--nacre); text-decoration: none;
+  }
+  .nav-back {
+    font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300;
+    letter-spacing: 0.2em; color: rgba(240,236,228,0.4); text-decoration: none;
+    text-transform: uppercase; transition: color 0.3s ease;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-back::before { content: '←'; font-size: 15px; }
+  .nav-back:hover { color: var(--nacre); }
+
+  .lang-switcher { display: flex; gap: 4px; align-items: center; }
+  .lang-btn {
+    font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: 0.15em;
+    color: rgba(240,236,228,0.3); background: none; border: none; cursor: pointer;
+    padding: 4px 8px; transition: color 0.2s ease; text-transform: uppercase;
+  }
+  .lang-btn:hover { color: rgba(240,236,228,0.7); }
+  .lang-btn.active { color: var(--nacre); border-bottom: 1px solid var(--nacre); }
+  .lang-sep { color: rgba(240,236,228,0.15); font-size: 11px; }
+
+  main {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto;
+    padding: 148px 48px 100px;
+  }
+
+  .eyebrow {
+    font-family: 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 300;
+    letter-spacing: 0.5em; color: var(--nacre); text-transform: uppercase;
+    margin-bottom: 36px; display: flex; align-items: center; gap: 16px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--nacre-dim); }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 88px); font-weight: 300;
+    line-height: 0.95; letter-spacing: -0.02em; color: var(--white);
+    margin-bottom: 14px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+  .page-title-sub {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(16px, 2.5vw, 24px); font-weight: 300;
+    color: var(--nacre); letter-spacing: 0.06em; margin-bottom: 64px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .story-block {
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards;
+  }
+  .story-block:nth-of-type(1) { animation-delay: 0.65s; }
+  .story-block:nth-of-type(2) { animation-delay: 0.8s; }
+  .story-block:nth-of-type(3) { animation-delay: 0.95s; }
+  .story-block:nth-of-type(4) { animation-delay: 1.1s; }
+  .story-block:nth-of-type(5) { animation-delay: 1.25s; }
+
+  .word-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px); font-weight: 300;
+    color: var(--nacre); letter-spacing: 0.04em; margin-bottom: 4px;
+  }
+  .word-kr {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px; font-weight: 300;
+    color: rgba(196,169,106,0.45); letter-spacing: 0.12em;
+    margin-bottom: 14px; display: block;
+  }
+
+  .text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.4vw, 21px); font-weight: 300;
+    line-height: 1.95; color: rgba(240,236,228,0.72);
+  }
+  .text em { font-style: italic; color: var(--white); }
+  .text p + p { margin-top: 1.4em; }
+
+  .divider {
+    width: 40px; height: 1px; background: rgba(196,169,106,0.2);
+    margin: 56px 0;
+    opacity: 0; animation: fadeUp 0.8s ease 1.3s forwards;
+  }
+
+  .statement {
+    opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards;
+  }
+  .statement-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3.2vw, 32px); font-weight: 300;
+    color: rgba(240,236,228,0.6); line-height: 1.7;
+  }
+  .statement-line.accent { color: var(--white); font-style: italic; }
+
+  footer {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto;
+    padding: 32px 48px 48px;
+    border-top: 1px solid rgba(196,169,106,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo { font-family: 'Noto Serif KR', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.15em; color: var(--nacre); }
+  .footer-copy { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: rgba(240,236,228,0.18); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+  [data-i18n] { transition: opacity 0.18s ease; }
+  body.switching [data-i18n] { opacity: 0; }
+  body.lang-kr .text,
+  body.lang-kr .statement-line { font-family: 'Noto Serif KR', serif; }
+
+  @media (max-width: 600px) {
+    nav { padding: 18px 20px; }
+    main { padding: 110px 24px 80px; }
+    footer { padding: 28px 24px 40px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body class="lang-en">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="soolgom.html" class="nav-logo">술곰</a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="de">DE</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="kr">한국어</button>
+  </div>
+  <a href="soolgom.html" class="nav-back" data-i18n="nav_back">Back</a>
+</nav>
+
+<main>
+  <p class="eyebrow">Soolgom Brewing · 술곰 브루잉</p>
+
+  <h1 class="page-title" data-i18n="title">Why<br>Mäkgeolli?</h1>
+  <p class="page-title-sub" data-i18n="title_sub">왜 맥걸리인가?</p>
+
+  <!-- Block 1: Hook -->
+  <div class="story-block">
+    <div class="text" data-i18n="block1">
+      <p>The name is a fusion, just like the drink itself.</p>
+      <p>You noticed something when you read it. An umlaut where it doesn't belong. A German letter inside a Korean word. That's not a typo. That's the whole story.</p>
+    </div>
+  </div>
+
+  <!-- Block 2: Maekju -->
+  <div class="story-block">
+    <div class="word-title">Maekju</div>
+    <span class="word-kr">맥주</span>
+    <div class="text" data-i18n="block2">
+      <p>The Korean word for beer. Brewed from malt, naturally fermented. A drink with centuries of European tradition behind it, from monastery breweries to Berlin craft bars.</p>
+    </div>
+  </div>
+
+  <!-- Block 3: Makgeolli -->
+  <div class="story-block">
+    <div class="word-title">Makgeolli</div>
+    <span class="word-kr">막걸리</span>
+    <div class="text" data-i18n="block3">
+      <p>Korea's oldest fermented drink. Cloudy, rice-based, alive with natural culture. A drink to swallow the day whole — together.</p>
+    </div>
+  </div>
+
+  <!-- Block 4: Mäkgeolli -->
+  <div class="story-block">
+    <div class="word-title">Mäkgeolli</div>
+    <span class="word-kr">맥걸리</span>
+    <div class="text" data-i18n="block4">
+      <p>A new word for something that didn't exist before. Two fermented drinks. Two cultures. One brewer who grew up with one and trained in the other.</p>
+      <p>The process is beer. The soul is makgeolli. And the umlaut ä? That marks where it was made.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Final statement -->
+  <div class="statement">
+    <p class="statement-line" data-i18n="s1">Not a translation.</p>
+    <p class="statement-line" data-i18n="s2">Not a compromise.</p>
+    <p class="statement-line accent" data-i18n="s3">A new identity.</p>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-logo">술곰 브루잉</span>
+  <span class="footer-copy">© 2026 Soolgom Brewing</span>
+</footer>
+
+<script>
+const T = {
+  en: {
+    nav_back: "Back",
+    title: "Why<br>Mäkgeolli?",
+    title_sub: "왜 맥걸리인가?",
+    block1: "<p>The name is a fusion, just like the drink itself.</p><p>You noticed something when you read it. An umlaut where it doesn't belong. A German letter inside a Korean word. That's not a typo. That's the whole story.</p>",
+    block2: "<p>The Korean word for beer. Brewed from malt, naturally fermented. A drink with centuries of European tradition behind it, from monastery breweries to Berlin craft bars.</p>",
+    block3: "<p>Korea's oldest fermented drink. Cloudy, rice-based, alive with natural culture. A drink to swallow the day whole — together.</p>",
+    block4: "<p>A new word for something that didn't exist before. Two fermented drinks. Two cultures. One brewer who grew up with one and trained in the other.</p><p>The process is beer. The soul is makgeolli. And the umlaut ä? That marks where it was made.</p>",
+    s1: "Not a translation.",
+    s2: "Not a compromise.",
+    s3: "A new identity."
+  },
+  de: {
+    nav_back: "Zurück",
+    title: "Warum<br>Mäkgeolli?",
+    title_sub: "왜 맥걸리인가?",
+    block1: "<p>Der Name ist eine Fusion — genau wie das Getränk.</p><p>Beim Lesen ist Ihnen etwas aufgefallen. Ein Umlaut, der dort nicht hingehört. Ein deutscher Buchstabe in einem koreanischen Wort. Das ist kein Tippfehler. Das ist die ganze Geschichte.</p>",
+    block2: "<p>Das koreanische Wort für Bier. Aus Malz gebraut, natürlich vergoren. Ein Getränk mit einer jahrhundertealten europäischen Tradition, von Klosterbrauereien bis zu Berliner Craft-Bars.</p>",
+    block3: "<p>Koreas ältestes fermentiertes Getränk. Trüb, auf Reisbasis, lebendig durch natürliche Kulturen. Ein Schluck, der den Tag gemeinsam vergessen lässt.</p>",
+    block4: "<p>Ein neues Wort für etwas, das es vorher nicht gab. Zwei fermentierte Getränke. Zwei Kulturen. Ein Brauer, der mit dem einen aufgewachsen ist und im anderen gelernt hat.</p><p>Der Prozess ist Bier. Die Seele ist Makgeolli. Und das Umlaut ä? Das markiert, wo es gebraut wurde.</p>",
+    s1: "Keine Übersetzung.",
+    s2: "Kein Kompromiss.",
+    s3: "Eine neue Identität."
+  },
+  kr: {
+    nav_back: "홈으로",
+    title: "왜<br>맥걸리인가?",
+    title_sub: "Why Mäkgeolli?",
+    block1: "<p>이름 자체가 이 음료처럼 융합이다.</p><p>읽는 순간 뭔가 이상하다고 느꼈을 거다. 어울리지 않는 자리에 놓인 움라우트. 한국어 단어 안에 들어온 독일어 알파벳. 오타가 아니다. 그게 전부다.</p>",
+    block2: "<p>맥아로 자연 발효시킨 술. 수도원 양조장에서 베를린 크래프트 바까지, 수백 년 유럽 양조 전통의 언어.</p>",
+    block3: "<p>한국에서 가장 오래된 발효 음료. 뿌옇고, 쌀로 만들고, 자연 균으로 살아있는 술. 고된 하루를 한 잔에 담아 함께 넘겨버리던 술.</p>",
+    block4: "<p>둘을 합치면 맥걸리 — 전에는 존재하지 않았던 것을 위한 새로운 단어. 두 개의 발효주. 두 개의 문화. 하나는 자라면서 마셨고, 하나는 배우면서 빚었다.</p><p>공정은 맥주다. 영혼은 막걸리다. 그리고 움라우트 ä? 그건 이것이 만들어진 곳을 새긴다.</p>",
+    s1: "번역도 아니고,",
+    s2: "타협도 아닌.",
+    s3: "새로운 정체성."
+  }
+};
+
+let lang = 'en';
+function setLang(l) {
+  if (l === lang) return;
+  document.body.classList.add('switching');
+  setTimeout(() => {
+    lang = l;
+    document.body.className = 'lang-' + l;
+    const t = T[l];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.dataset.i18n;
+      if (t[k] !== undefined) el.innerHTML = t[k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    document.documentElement.lang = l === 'kr' ? 'ko' : l;
+  }, 180);
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.transform='translate(-50%,-50%) scale(2)'; ring.style.transform='translate(-50%,-50%) scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cur.style.transform='translate(-50%,-50%) scale(1)'; ring.style.transform='translate(-50%,-50%) scale(1)'; });
+});
+</script>
+</body>
+</html>
